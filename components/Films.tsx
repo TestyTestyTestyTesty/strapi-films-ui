@@ -1,20 +1,29 @@
-import Link from "next/link";
+import React from "react";
+import { useFetchUser } from "../lib/authContext";
+import FilmsList from "./FilmsList";
+import Layout from "./Layout";
 
-const Films = ({ films }: any) => {
+export default function Films({ films, error }: any) {
+    const { user, loading } = useFetchUser();
+    if (error) {
+        return (
+            <Layout user={user}>
+                <h1 className="text-2xl md:text-3xl font-extrabold leading-tighter mb-4 text-center">
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 py-2">
+                        {error}
+                    </span>
+                </h1>
+            </Layout>
+        );
+    }
     return (
-        <ul className="list-none space-y-4 text-4xl font-bold mb-3">
-            {films &&
-                films.data.map((film: any) => {
-                    return (
-                        <li key={film.id}>
-                            <Link href={`film/` + film.attributes.slug}>
-                                {film.attributes.title}
-                            </Link>
-                        </li>
-                    );
-                })}
-        </ul>
+        <Layout user={user}>
+            <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter mb-4">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 py-2">
+                    Films
+                </span>
+            </h1>
+            <FilmsList films={films} />
+        </Layout>
     );
-};
-
-export default Films;
+}
