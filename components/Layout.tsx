@@ -2,7 +2,7 @@ import Head from "next/head";
 import Nav from "./Nav";
 import { UserProvider } from "../lib/authContext";
 
-const Layout = ({ user, loading = false, children }) => (
+const Layout = ({ user, loading = false, children }: any) => (
     <UserProvider value={{ user, loading }}>
         <Head>
             <title>Film Database</title>
