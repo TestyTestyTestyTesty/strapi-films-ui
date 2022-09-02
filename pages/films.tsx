@@ -30,7 +30,7 @@ export default function films({ films, error }: any) {
 }
 
 export async function getStaticProps() {
-    const { data, error } = await fetchAPI("/filmsa");
+    const { data, error } = await fetchAPI("/films");
 
     return {
         props: {
