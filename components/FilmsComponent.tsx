@@ -7,7 +7,12 @@ import FilmsList from "./FilmsList";
 import Layout from "./Layout";
 
 interface props {}
-export default function FilmsComponent({ error, films, queryParam }: any) {
+export default function FilmsComponent({
+    error,
+    films,
+    queryParam,
+    paginationData,
+}: any) {
     const router = useRouter();
     const { user, loading } = useFetchUser();
     const [currentItems, setCurrentItems] = useState(films);
@@ -15,6 +20,8 @@ export default function FilmsComponent({ error, films, queryParam }: any) {
     const [currentPage, setcurrentPage] = useState(queryParam);
 
     useEffect(() => {
+        console.log(paginationData);
+
         const currentPath = router.pathname;
         const currentQuery = router.query;
         currentQuery.page = currentPage;
@@ -67,7 +74,7 @@ export default function FilmsComponent({ error, films, queryParam }: any) {
                 nextLabel=">"
                 onPageChange={handlePageClick}
                 pageRangeDisplayed={5}
-                pageCount={4}
+                pageCount={paginationData.pageCount}
                 previousLabel="<"
                 containerClassName="w-full flex justify-center"
                 pageClassName="px-1"

@@ -4,9 +4,19 @@ import FilmsComponent from "../components/FilmsComponent";
 
 import { fetchAPI } from "../lib/api";
 
-export default function FilmsPage({ films, error, queryParam }: any) {
+export default function FilmsPage({
+    films,
+    error,
+    queryParam,
+    paginationData,
+}: any) {
     return (
-        <FilmsComponent error={error} films={films} queryParam={queryParam} />
+        <FilmsComponent
+            error={error}
+            films={films}
+            queryParam={queryParam}
+            paginationData={paginationData}
+        />
     );
 }
 
@@ -15,11 +25,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const { data, error } = await fetchAPI(
         `films?pagination[pageSize]=2&pagination[page]=${queryParam}`
     );
+
     return {
         props: {
             films: data.data,
             error: error,
             queryParam: Number(queryParam),
+            paginationData: data.meta.pagination,
         },
     };
 };
