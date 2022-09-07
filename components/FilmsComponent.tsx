@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { fetchAPI } from "../lib/api";
-import { useFetchUser } from "../lib/authContext";
 import FilmsList from "./FilmsList";
 import Layout from "./Layout";
 
@@ -14,7 +13,6 @@ export default function FilmsComponent({
     paginationData,
 }: any) {
     const router = useRouter();
-    const { user, loading } = useFetchUser();
     const [currentItems, setCurrentItems] = useState(films);
     const [loadingData, setLoadingData] = useState(false);
     const [currentPage, setcurrentPage] = useState(queryParam);
@@ -49,7 +47,7 @@ export default function FilmsComponent({
 
     if (error) {
         return (
-            <Layout user={user}>
+            <Layout>
                 <h1 className="text-2xl md:text-3xl font-extrabold leading-tighter mb-4 text-center">
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 py-2">
                         {error}
@@ -59,7 +57,7 @@ export default function FilmsComponent({
         );
     }
     return (
-        <Layout user={user}>
+        <Layout>
             <h1 className="text-5xl md:text-6xl font-extrabold text-center leading-tighter mb-4">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 py-2">
                     Films

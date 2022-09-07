@@ -3,8 +3,6 @@ import Link from "next/link";
 import React from "react";
 export default function Nav() {
     const { data: session } = useSession();
-    const loading = false;
-    const user = true;
     return (
         <nav
             className="
@@ -94,7 +92,7 @@ export default function Nav() {
                                 onClick={() => signOut()}
                                 style={{ cursor: "pointer" }}
                             >
-                                Logout ({session.user.email})
+                                Logout ({session.user?.email})
                             </a>
                         </li>
                     )}
