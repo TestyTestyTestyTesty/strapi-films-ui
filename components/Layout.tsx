@@ -1,9 +1,8 @@
 import Head from "next/head";
 import Nav from "./Nav";
-import { UserProvider } from "../lib/authContext";
 
-const Layout = ({ user, loading = false, children }: any) => (
-    <UserProvider value={{ user, loading }}>
+const Layout = ({ children }: any) => (
+    <div>
         <Head>
             <title>Film Database</title>
         </Head>
@@ -26,6 +25,6 @@ const Layout = ({ user, loading = false, children }: any) => (
                 <div className="text-2xl font-medium">{children}</div>
             </div>
         </main>
-    </UserProvider>
+    </div>
 );
 export default Layout;

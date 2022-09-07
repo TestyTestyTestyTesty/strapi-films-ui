@@ -1,8 +1,8 @@
+import { useSession } from "next-auth/react";
 import Layout from "../components/Layout";
-import { useFetchUser } from "../lib/authContext";
 
 export default function Home() {
-    const { user, loading } = useFetchUser();
+    const { data: session } = useSession();
     console.log(
         `environment: ${
             process.env.NEXT_PUBLIC_STRAPI_URL?.includes("localhost")
@@ -12,7 +12,7 @@ export default function Home() {
     );
 
     return (
-        <Layout user={user}>
+        <Layout>
             <h1 className="font-bold text-5xl">Movie strapi app</h1>
         </Layout>
     );

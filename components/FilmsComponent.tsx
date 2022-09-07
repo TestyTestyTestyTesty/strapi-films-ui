@@ -20,8 +20,6 @@ export default function FilmsComponent({
     const [currentPage, setcurrentPage] = useState(queryParam);
 
     useEffect(() => {
-        console.log(paginationData);
-
         const currentPath = router.pathname;
         const currentQuery = router.query;
         currentQuery.page = currentPage;
@@ -48,6 +46,7 @@ export default function FilmsComponent({
 
         setcurrentPage(event.selected + 1);
     };
+
     if (error) {
         return (
             <Layout user={user}>
@@ -66,8 +65,7 @@ export default function FilmsComponent({
                     Films
                 </span>
             </h1>
-            {/*             {loadingData && <p>loading data</p>}
-            {!loadingData && <FilmsList films={currentItems} />} */}
+
             <FilmsList films={currentItems} />
             <ReactPaginate
                 breakLabel="..."
