@@ -8,7 +8,10 @@ export default NextAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
     ],
-    secret: "56298d1d7869063a4f8d18af4f1729ef",
+
+    secret: process.env.NEXT_PUBLIC_STRAPI_URL?.includes("localhost")
+        ? null
+        : "56298d1d7869063a4f8d18af4f1729ef",
     session: { strategy: "jwt" },
 
     callbacks: {
